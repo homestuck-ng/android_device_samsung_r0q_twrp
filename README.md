@@ -1,6 +1,6 @@
 # OrangeFox / TWRP device tree — Samsung Galaxy S22 (r0q, SM-S901E)
 
-Fork of [yoro1836/android_device_samsung_r0q_twrp](https://github.com/yoro1836/android_device_samsung_r0q_twrp) for [hs-ui](https://github.com/homestuck-ng/hs-ui).
+Fork: [homestuck-ng/android_device_samsung_r0q_twrp](https://github.com/homestuck-ng/android_device_samsung_r0q_twrp) (`fox_12.1`), based on [yoro1836/android_device_samsung_r0q_twrp](https://github.com/yoro1836/android_device_samsung_r0q_twrp). Used by [hs-ui](https://github.com/homestuck-ng/hs-ui).
 
 ## What changed
 
@@ -16,7 +16,7 @@ Enter the **Android lockscreen PIN / password / pattern** when OrangeFox asks.
 
 ```sh
 # after orangefox_sync.sh --branch 12.1
-git clone https://github.com/homestuck-ng/android_device_samsung_r0q.git device/samsung/r0q -b fox_12.1
+git clone https://github.com/homestuck-ng/android_device_samsung_r0q_twrp.git device/samsung/r0q -b fox_12.1
 export ALLOW_MISSING_DEPENDENCIES=true
 . build/envsetup.sh
 lunch twrp_r0q-eng
