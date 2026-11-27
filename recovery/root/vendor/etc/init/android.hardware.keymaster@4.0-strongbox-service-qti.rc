@@ -1,14 +1,8 @@
-on property:sys.listeners.registered=true
-    start keymaster-sb-4-0
-
-on property:vendor.sys.listeners.registered=true
-    start keymaster-sb-4-0
-
-on property:ro.crypto.type=block && property:ro.crypto.fs_crypto_blkdev=*
-    stop keymaster-sb-4-0
-
-on property:twrp.all.users.decrypted=true
-    stop keymaster-sb-4-0
+# r0q userdata FBE is skeymast (KeyMint), not QTI strongbox.
+# keymaster.b00 / keymaster64.b00 are not on apnhlos, so this HAL abort-loops.
+# Leaving it in the vintf manifest makes keystore2 wait forever on
+# IKeymasterDevice/strongbox and OrangeFox never leaves the splash.
+# The service stays installed and disabled. Do not start it.
 
 service keymaster-sb-4-0 /system/bin/android.hardware.keymaster@4.0-strongbox-service-qti
     user root

@@ -36,9 +36,15 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    # Mount firmware
+    # Mount firmware. skeymast lives here; QSEECom loads it by filename.
     mkdir /vendor/firmware_mnt
     mount vfat /dev/block/bootdevice/by-name/apnhlos /vendor/firmware_mnt
+
+    # GAK/DAK for skeymint. Mount before keymint starts.
+    mkdir /mnt/vendor/efs 0770 radio system
+    mkdir /mnt/vendor/persist 0770 system system
+    mount ext4 /dev/block/bootdevice/by-name/efs /mnt/vendor/efs
+    mount ext4 /dev/block/bootdevice/by-name/persist /mnt/vendor/persist
 
     export ANDROID_ROOT /system_root
 
@@ -47,10 +53,8 @@ on boot
 
 on property:crypto.ready=1
     start keymint-default
-    start keymaster-sb-4-0
 
 on property:crypto.ready=0
-    stop keymaster-sb-4-0
     stop keymint-default
 
 on property:twrp.user.0.decrypt=0
